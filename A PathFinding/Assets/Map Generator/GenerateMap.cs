@@ -203,4 +203,28 @@ public class GenerateMap : MonoBehaviour
             enemy.Reset();
         }
     }
+    public Tile GetTile(Vector3 position)
+    {
+        int x = Mathf.FloorToInt(position.x + width / 2);
+        int y = Mathf.FloorToInt(position.z + height / 2);
+
+        if (x >= 0 && x < width && y >= 0 && y < height)
+        {
+            return tileList[x, y]; // Access the tile from the 2D array
+        }
+
+        return null; // Return null if the position is out of bounds
+    }
+    public Tile GetTileOffset(Tile startTile, int xOffset, int yOffset)
+    {
+        int targetX = startTile.indexX + xOffset;
+        int targetY = startTile.indexY + yOffset;
+
+        if (targetX >= 0 && targetX < width && targetY >= 0 && targetY < height)
+        {
+            return tileList[targetX, targetY]; // Access the offset tile from the 2D array
+        }
+
+        return startTile; // If the offset is invalid, return the same tile
+    }
 }
